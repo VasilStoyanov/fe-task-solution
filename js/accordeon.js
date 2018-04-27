@@ -33,7 +33,11 @@
     }, CONSTANTS.FAKE_AJAX_TIME_DELAY_IN_MS);
   });
 
-  const render = domElement => content => domElement.append(content);
+  const render = domElement => content => {
+    domElement.innerHTML = "";
+    domElement.append(content);
+  };
+
   const renderToQuestionsAndAnswerContainer = render(accordeonContainer);
   const printUsing = printer => method => msg => printer[method](msg);
   const debounce = (fn, waitTime, immediate) => {
@@ -82,11 +86,11 @@
       questionAndAnswerContainer.classList += "question-and-answer-container";
 
       questionContainer.classList += "question-container";
-      questionContent.innerHTML = el.question || "";
+      questionContent.innerHTML = "Q:" + el.question || "";
 
       answerContainer.classList += "answer-container";
       answerContent.innerHTML = el.answer || "";
-      answerContainer.style.display = "none"; // Initial state
+      answerContainer.style.display = "none";
 
       questionContainer.append(questionContent);
       answerContainer.append(answerContent);
